@@ -68,72 +68,72 @@
 			{/if}
 			<article aria-posinset={index + 1} aria-setsize={recipes.length} class="person">
 				{#key active == recipe_name}
-				{#if active == recipe_name && multiplier > 0}
-					<p><strong>{cook_time}</strong></p>
-					{#if total_time}
+					{#if active == recipe_name && multiplier > 0}
+						<p><strong>{cook_time}</strong></p>
+						{#if total_time}
+							<p>
+								Total Time: {total_time}
+							</p>
+						{/if}
+						{#if prep_time}
+							<p>
+								Prep Time: {prep_time}
+							</p>
+						{/if}			
 						<p>
-							Total Time: {total_time}
+							Servings: {servings * multiplier}
+						</p>
+						<p>
+							Yield: {total_yield.split(" ").map((x)=> /^-?[\d.]+(?:e-?\d+)?$/.test(x) ? parseInt(x) * multiplier : x ).join(" ")}
+						</p>
+						<div>
+							<h3>
+								Ingredients:
+							</h3>
+							<ul>
+								{#each ingredients.split("; ") as ingredient}
+									<li class="clean">
+									</li>
+									<input type="checkbox" id={ingredient} name={ingredient} value={ingredient} >
+									<label for={ingredient}>{parseAmount(ingredient)}</label>
+								{/each}
+							</ul>
+						</div>
+						<div>
+							<h3>
+								Directions:
+							</h3>
+							<ol>
+								{#each directions.split(", ") as direction}
+									<li>
+										{direction}
+									</li>
+								{/each}
+							</ol>
+						</div>
+						<div>
+								{#each cuisine_path.split(" ") as tag}
+									<span class="tag">
+										#{tag}
+									</span>
+								{/each}
+						</div>
+						<div>
+							<h3>
+								Nutrition:
+							</h3>
+							<ul>
+								{#each nutrition.split(", ") as fact}
+									<li class="clean">
+										{fact}
+									</li>
+								{/each}
+							</ul>
+						</div>
+						<p>
+							Timing: {timing}			
 						</p>
 					{/if}
-					{#if prep_time}
-						<p>
-							Prep Time: {prep_time}
-						</p>
-					{/if}			
-					<p>
-						Servings: {servings * multiplier}
-					</p>
-					<p>
-						Yield: {total_yield.split(" ").map((x)=> /^-?[\d.]+(?:e-?\d+)?$/.test(x) ? parseInt(x) * multiplier : x ).join(" ")}
-					</p>
-					<div>
-						<h3>
-							Ingredients:
-						</h3>
-						<ul>
-							{#each ingredients.split("; ") as ingredient}
-								<li class="clean">
-								</li>
-								<input type="checkbox" id={ingredient} name={ingredient} value={ingredient} >
-								<label for={ingredient}>{parseAmount(ingredient)}</label>
-							{/each}
-						</ul>
-					</div>
-					<div>
-						<h3>
-							Directions:
-						</h3>
-						<ol>
-							{#each directions.split(", ") as direction}
-								<li>
-									{direction}
-								</li>
-							{/each}
-						</ol>
-					</div>
-					<div>
-							{#each cuisine_path.split(" ") as tag}
-								<span class="tag">
-									#{tag}
-								</span>
-							{/each}
-					</div>
-					<div>
-						<h3>
-							Nutrition:
-						</h3>
-						<ul>
-							{#each nutrition.split(", ") as fact}
-								<li class="clean">
-									{fact}
-								</li>
-							{/each}
-						</ul>
-					</div>
-					<p>
-						Timing: {timing}			
-					</p>
-				{/if}
 				{/key}
 			</article>
 		</div>
@@ -145,7 +145,8 @@
 		<h2>
 			How Many Meals?
 		</h2>
-		<input id="how-many" bind:value={multiplierString} />
+		<!-- svelte-ignore a11y-autofocus -->
+		<input id="how-many" bind:value={multiplierString} autofocus>
 		<button on:click={()=>doTheMulti()}>
 			Go!
 		</button>
