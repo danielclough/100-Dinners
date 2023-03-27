@@ -8,7 +8,7 @@
 	let reversed = split.reverse();
 	for (let x of reversed) {
 		if (/^-?[\d.]+(?:e-?\d+)?$/.test(x)) {
-				newStr.push(String(parseInt(x) * multiplier))
+				newStr.push((parseInt(x) * multiplier).toFixed(1))
 		} else newStr.push(x)
 	}
 	return newStr.reverse().join(" ");
@@ -23,7 +23,7 @@
 		}
 		else if (/^-?[\d.]+(?:e-?\d+)?$/.test(x)) {
 			if (multiplier > 0 && !!convert) {
-				newStr.push(String((parseInt(x) * multiplier) / 16 ))
+				newStr.push(((parseInt(x) * multiplier) / 16 ).toFixed(1))
 			} else newStr.push(x)
 		}
 		else newStr.push(x)
@@ -35,7 +35,9 @@
   }
 
   const doTheMulti = () => {
-	multiplier = multiplierString;
+	let filtered = recipes.filter(x=>x.recipe_name === active)
+	let servings: number = filtered[0].servings;
+	multiplier = multiplierString/servings;
 	howMany = false;
   }
 
@@ -85,10 +87,10 @@
 							</p>
 						{/if}			
 						<p>
-							Servings: {servings * multiplier}
+							Servings: {(servings * multiplier).toFixed(0)}
 						</p>
 						<p>
-							Yield: {total_yield.split(" ").map((x)=> /^-?[\d.]+(?:e-?\d+)?$/.test(x) ? parseInt(x) * multiplier : x ).join(" ")}
+							Yield: {total_yield.split(" ").map((x)=> /^-?[\d.]+(?:e-?\d+)?$/.test(x) ? (parseInt(x) * multiplier).toFixed(0) : x ).join(" ")}
 						</p>
 						<div>
 							<h3>
@@ -144,6 +146,7 @@
       {/each}
   </section>
 </main>
+
 {#if howMany}
 	<div class="how-many">
 		<h2>
@@ -156,6 +159,7 @@
 		</button>
 	</div>
 {/if}
+
 
 <style>
 	img {
