@@ -52,6 +52,9 @@
 <header class="heading">
   <div class="title">
     <h1>Recipes</h1>
+	{#if active !== ""}
+		<div on:click={()=>active=""} style="float:right;font-size:2rem;">X</div>
+	{/if}
   </div>
 </header>
 <main>
@@ -60,6 +63,7 @@
 		<div class="recipe">
 			{#if active == "" || active === recipe_name}
 				<div class="img">
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<img src={img_src}  alt={recipe_name} on:click={() => openHowMany(recipe_name)}/>
 					<h2>
 						{recipe_name}

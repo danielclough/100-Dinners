@@ -5,7 +5,7 @@
 
 <header>
 	<div class="corner">
-		<a href="/">
+		<a class="lefty" href="/">
 			<!-- <img src={logo} alt="100 Dinners" /> -->
 			100 Dinners
 		</a>
@@ -44,6 +44,10 @@
 	.corner {
 		width: 3em;
 		height: 3em;
+	}
+	.lefty {
+		margin-left: 1rem;
+		text-align: center;
 	}
 
 	.corner a {
