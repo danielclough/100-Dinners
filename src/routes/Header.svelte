@@ -29,7 +29,7 @@
 	</nav>
 
 	<div class="corner">
-		<a href="https://github.com/Daniel-Clough-LLC/100-Dinners">
+		<a href="https://github.com/danielclough/100-Dinners">
 			<img src={github} alt="GitHub" />
 		</a>
 	</div>

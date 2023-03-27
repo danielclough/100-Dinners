@@ -13,7 +13,7 @@
 	</main>
 
 	<footer>
-		<a href="https://github.com/Daniel-Clough-LLC/PleaseSendNoodles/tree/main/LICENSE.md"><img class="copyleft" src={copyleft} alt="copyleft" /> Copyleft AGPLv3</a>
+		<a href="https://github.com/danielclough/100-Dinners/tree/main/LICENSE.md"><img class="copyleft" src={copyleft} alt="copyleft" /> Copyleft AGPLv3</a>
 	</footer>
 </div>
 
